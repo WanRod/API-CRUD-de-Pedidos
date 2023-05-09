@@ -15,26 +15,26 @@ namespace API_CRUD_de_Pedidos.Controllers
             _produtoRepository = produtoRepository;
         }
 
-        [HttpGet("Lista de produtos")]
+        [HttpGet]
         public async Task<IEnumerable<Produto>> GetProdutos()
         {
             return await _produtoRepository.Get();
         }
 
-        [HttpGet("Encontrar (Id)")]
+        [HttpGet("Id")]
         public async Task<ActionResult<Produto>> GetProdutos(int id)
         {
             return await _produtoRepository.Get(id);
         }
 
-        [HttpPost("Adicionar")]
+        [HttpPost]
         public async Task<ActionResult<Produto>> PostProdutos([FromBody] Produto produto)
         {
             var novoProduto = await _produtoRepository.Create(produto);
             return CreatedAtAction(nameof(GetProdutos), new { id = novoProduto.Id }, novoProduto);
         }
 
-        [HttpDelete("Apagar (Id)")]
+        [HttpDelete("Id")]
         public async Task<ActionResult> Delete(int id)
         {
             var produtoToDelete = await _produtoRepository.Get(id);
@@ -47,7 +47,7 @@ namespace API_CRUD_de_Pedidos.Controllers
 
         }
 
-        [HttpPut("Atualizar")]
+        [HttpPut]
         public async Task<ActionResult> PutProdutos(int id, [FromBody] Produto produto)
         {
             if (id != produto.Id)

@@ -14,26 +14,26 @@ namespace API_CRUD_de_Pedidos.Controllers
             _pedidoRepository = pedidoRepository;
         }
 
-        [HttpGet("Lista de pedidos")]
+        [HttpGet]
         public async Task<IEnumerable<Pedido>> GetPedidos()
         {
             return await _pedidoRepository.Get();
         }
 
-        [HttpGet("Encontrar (Id)")]
+        [HttpGet("Id")]
         public async Task<ActionResult<Pedido>> GetPedidos(int id)
         {
             return await _pedidoRepository.Get(id);
         }
 
-        [HttpPost("Adicionar")]
+        [HttpPost]
         public async Task<ActionResult<Pedido>> PostPedidos([FromBody] Pedido pedido)
         {
             var novoPedido = await _pedidoRepository.Create(pedido);
             return CreatedAtAction(nameof(GetPedidos), new { id = novoPedido.Id }, novoPedido);
         }
 
-        [HttpDelete("Apagar (Id)")]
+        [HttpDelete("Id")]
         public async Task<ActionResult> Delete(int id)
         {
             var pedidoToDelete = await _pedidoRepository.Get(id);
@@ -45,7 +45,7 @@ namespace API_CRUD_de_Pedidos.Controllers
             return NoContent();
         }
 
-        [HttpPut("Atualizar")]
+        [HttpPut]
         public async Task<ActionResult> PutPedidos(int id, [FromBody] Pedido pedido)
         {
             if (id != pedido.Id)
